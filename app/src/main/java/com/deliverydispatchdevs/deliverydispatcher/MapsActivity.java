@@ -1,7 +1,8 @@
 package com.deliverydispatchdevs.deliverydispatcher;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -9,7 +10,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity
+public class MapsActivity extends AppCompatActivity
 {
 
     private GoogleMap mGoogleMap; // Might be null if Google Play services APK is not available.
@@ -19,6 +20,11 @@ public class MapsActivity extends FragmentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        // Set the Toolbar from our layout as our activity's ActionBar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mapToolbar);
+        setSupportActionBar(toolbar);
+
         setUpMapIfNeeded();
     }
 
@@ -51,7 +57,7 @@ public class MapsActivity extends FragmentActivity
         {
             // Try to obtain the map from the SupportMapFragment.
             // Use getMapAsync() is the recommended way to get a map.
-            ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+            ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment))
                     .getMapAsync(new OnMapReadyCallback()
                     {
                         @Override
