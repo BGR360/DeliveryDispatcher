@@ -1,8 +1,6 @@
 package com.deliverydispatchdevs.deliverydispatcher.order;
 
-/**
- * Created by Saad on 7/16/2015.
- */
+
 public class DeliveryOrder
 
 {
@@ -12,6 +10,11 @@ public class DeliveryOrder
     private Time mPromisedTime;
     private int mOrderNumber;
     private String mCustomerName;
+
+    public DeliveryOrder()
+    {
+        this(null, null, null, null, -1);
+    }
 
     public DeliveryOrder(Address destination, Time placedTime, Time readyTime, Time promisedTime, int orderNumber)
     {

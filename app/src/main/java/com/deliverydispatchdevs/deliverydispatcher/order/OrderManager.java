@@ -22,20 +22,47 @@ public class OrderManager
         mUndispatchedOrders.add(order);
     }
 
+    /**
+     * Dispatches the given order by moving it from the undispatched list
+     * to the dispatched list. If it was not in the undispatched list,
+     * does not add it to the dispatched list.
+     *
+     * @param order The DeliveryOrder we want to dispatch
+     * @return Returns true if the order was contained in mUndispatchedOrders, false if not.
+     */
      public static boolean dispatchOrder(DeliveryOrder order)
-    {
-        mDispatchedOrders.add(order);
-        return mUndispatchedOrders.remove(order);
-    }
+     {
+         // If the order was in mUndispatchedOrders, move it to mDispatchedOrders
+         // Otherwise, we have to return false
+         if (mUndispatchedOrders.remove(order)) {
+             mDispatchedOrders.add(order);
+         } else {
+             return false;
+         }
+         return true;
+     }
 
-    public static OrderGroup createGroup()
-    {
-        return new OrderGroup();
-    }
+     @SuppressWarnings("ManualArrayToCollectionCopy")
+     public static OrderGroup createGroup(DeliveryOrder[] orders)
+     {
+         OrderGroup newGroup = new OrderGroup();
+         for(DeliveryOrder order : orders)
+         {
+             newGroup.add(order);
+         }
+         return newGroup;
+     }
 
     public static boolean dispatchGroup(OrderGroup group)
     {
-        return mOrderGroups.remove(group);
+        boolean ordersDispatched = true;
+
+        for(DeliveryOrder order : group)
+        {
+            ordersDispatched &= dispatchOrder(order);
+        }
+
+        return ordersDispatched;
     }
 
     public static void clearAll()

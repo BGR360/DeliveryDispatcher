@@ -6,6 +6,29 @@ import java.text.SimpleDateFormat;
 
 public class Time
 {
+    public Time()
+    {
+        this(0,0,0);
+    }
+
+    public Time(int hour, int min, int sec)
+    {
+        mHours = hour;
+        mMinutes = min;
+        mSeconds = sec;
+    }
+
+    public Time(int hour, int min)
+    {
+        this(hour, min, 0);
+    }
+
+    public Time(int hour)
+    {
+        this(hour, 0, 0);
+    }
+
+
    private int mHours, mMinutes, mSeconds;
 
     public void setHours(int hours){mHours = hours; }
@@ -20,22 +43,7 @@ public class Time
 
     public int getSeconds() {return mSeconds;}
 
-    public Time(int hour, int min, int sec)
-    {
-        mHours = hour;
-        mMinutes=min;
-        mSeconds=sec;
-    }
 
-    public Time(int hour, int min)
-    {
-        mHours = hour; mMinutes = min;
-    }
-
-    public Time(int hour)
-    {
-        mHours = hour;
-    }
 
     public boolean equals(Object other)
     {
