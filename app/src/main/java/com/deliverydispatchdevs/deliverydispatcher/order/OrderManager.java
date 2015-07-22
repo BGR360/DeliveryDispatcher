@@ -49,6 +49,7 @@ public class OrderManager
          for(DeliveryOrder order : orders)
          {
              newGroup.add(order);
+
          }
          return newGroup;
      }
