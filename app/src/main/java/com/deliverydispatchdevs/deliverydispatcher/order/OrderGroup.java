@@ -8,34 +8,13 @@ import java.util.List;
 /**
  * Created by Saad on 7/16/2015.
  */
-public class OrderGroup
+public class OrderGroup extends ArrayList<DeliveryOrder>
 {
-    private Collection<DeliveryOrder> mOrders = new ArrayList<DeliveryOrder>();
     private Color mColor;
 
     public Color getColor()
     {
         return mColor;
-    }
-    public Collection<DeliveryOrder> getOrders()
-    {
-        return mOrders;
-    }
-
-    public void addOrder(DeliveryOrder order)
-    {
-        mOrders.add(order);
-    }
-
-
-    public boolean removeOrder(DeliveryOrder order)
-    {
-            return mOrders.remove(order);
-    }
-
-    public void clear()
-    {
-        mOrders.clear();
     }
 
     public void setColor(Color color)
@@ -45,7 +24,7 @@ public class OrderGroup
 
     public int getNumOrders()
     {
-        return mOrders.size();
+        return this.size();
     }
 
     public boolean equals(Object other)
@@ -54,10 +33,10 @@ public class OrderGroup
             return false;
         OrderGroup newGroup = (OrderGroup) other;
         if(newGroup.getColor()!=mColor) return false;
-        if(newGroup.getNumOrders()!=mOrders.size()) return false;
-        for(int count= 0; count<mOrders.size();count++)
+        if(newGroup.getNumOrders()!=this.size()) return false;
+        for(int count= 0; count<this.size();count++)
         {
-            if(!(((ArrayList)mOrders).get(count).equals(( (ArrayList)newGroup.getOrders() ).get(count))))
+            if(!(this.get(count).equals( newGroup.get(count))))
             {
                 return false;
             }
@@ -73,7 +52,7 @@ public class OrderGroup
     public String toString()
     {
         String s = "";
-        for(DeliveryOrder order: mOrders)
+        for(DeliveryOrder order: this)
         {
             s+= order.getOrderNumber() + ",";
         }
@@ -83,12 +62,12 @@ public class OrderGroup
 
     public Time getEarliestDueTime()
     {
-        Time earliestDue = ( (ArrayList<DeliveryOrder>)mOrders ).get(0).getPromisedTime();
-        for(int count = 1; count<mOrders.size();count++)
+        Time earliestDue = ( (ArrayList<DeliveryOrder>)this ).get(0).getPromisedTime();
+        for(int count = 1; count<this.size();count++)
         {
-            if( ((ArrayList<DeliveryOrder>)mOrders).get(count).getPromisedTime().compareTo(earliestDue) == -1 )
+            if( ((ArrayList<DeliveryOrder>)this).get(count).getPromisedTime().compareTo(earliestDue) == -1 )
             {
-                earliestDue = ((ArrayList<DeliveryOrder>)mOrders).get(count).getPromisedTime();
+                earliestDue = ((ArrayList<DeliveryOrder>)this).get(count).getPromisedTime();
             }
         } return earliestDue;
     }
