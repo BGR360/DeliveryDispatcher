@@ -1,23 +1,30 @@
 package com.deliverydispatchdevs.deliverydispatcher;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity
+public class MapsActivity extends AppCompatActivity
 {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private GoogleMap mGoogleMap; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        // Set the Toolbar from our layout as our activity's ActionBar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mapToolbar);
+        setSupportActionBar(toolbar);
+
         setUpMapIfNeeded();
     }
 
@@ -31,7 +38,7 @@ public class MapsActivity extends FragmentActivity
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
+     * call {@link #setUpMap()} once when {@link #mGoogleMap} is not null.
      * <p/>
      * If it isn't installed {@link SupportMapFragment} (and
      * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
@@ -46,27 +53,37 @@ public class MapsActivity extends FragmentActivity
     private void setUpMapIfNeeded()
     {
         // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null)
+        if (mGoogleMap == null)
         {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null)
-            {
-                setUpMap();
-            }
+            // Use getMapAsync() is the recommended way to get a map.
+            ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment))
+                    .getMapAsync(new OnMapReadyCallback()
+                    {
+                        @Override
+                        public void onMapReady(GoogleMap googleMap)
+                        {
+                            mGoogleMap = googleMap;
+
+                            // Check if we were successful in obtaining the map.
+                            if (mGoogleMap != null)
+                            {
+                                setUpMap();
+                            }
+                        }
+                    });
+
         }
     }
 
     /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
+     * This is where we can add markers or lines, add listeners, move the camera,
+     * or set up the map's UI settings.
      * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
+     * This should only be called once and when we are sure that {@link #mGoogleMap} is not null.
      */
     private void setUpMap()
     {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("A Different Title"));
+        mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("A Different Title"));
     }
 }
