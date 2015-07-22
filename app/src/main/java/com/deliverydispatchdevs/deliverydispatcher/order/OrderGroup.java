@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Saad on 7/16/2015.
- */
 public class OrderGroup extends ArrayList<DeliveryOrder>
 {
     private Color mColor;
@@ -62,12 +59,12 @@ public class OrderGroup extends ArrayList<DeliveryOrder>
 
     public Time getEarliestDueTime()
     {
-        Time earliestDue = ( (ArrayList<DeliveryOrder>)this ).get(0).getPromisedTime();
+        Time earliestDue = this.get(0).getPromisedTime();
         for(int count = 1; count<this.size();count++)
         {
-            if( ((ArrayList<DeliveryOrder>)this).get(count).getPromisedTime().compareTo(earliestDue) == -1 )
+            if( this.get(count).getPromisedTime().compareTo(earliestDue) == -1 )
             {
-                earliestDue = ((ArrayList<DeliveryOrder>)this).get(count).getPromisedTime();
+                earliestDue = this.get(count).getPromisedTime();
             }
         } return earliestDue;
     }

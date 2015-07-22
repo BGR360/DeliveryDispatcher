@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Saad on 7/16/2015.
- */
+
 public class OrderManager
 {
-    private static Collection<DeliveryOrder> mUndispatchedOrders = new ArrayList<DeliveryOrder>();
-    private static Collection<DeliveryOrder> mDispatchedOrders = new ArrayList<DeliveryOrder>();
-    private static Collection<OrderGroup> mOrderGroups = new ArrayList<OrderGroup>();
+    private static Collection<DeliveryOrder> mUndispatchedOrders = new ArrayList<>();
+    private static Collection<DeliveryOrder> mDispatchedOrders = new ArrayList<>();
+    private static Collection<OrderGroup> mOrderGroups = new ArrayList<>();
 
     public static Collection<DeliveryOrder> getDispatchedOrders(){return mDispatchedOrders;}
 

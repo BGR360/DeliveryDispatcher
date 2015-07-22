@@ -3,9 +3,7 @@ package com.deliverydispatchdevs.deliverydispatcher.order;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 
-/**
- * Created by Saad on 7/16/2015.
- */
+
 public class Time
 {
    private int mHours, mMinutes, mSeconds;

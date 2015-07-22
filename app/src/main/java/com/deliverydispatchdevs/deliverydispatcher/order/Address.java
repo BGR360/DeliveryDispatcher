@@ -1,8 +1,6 @@
 package com.deliverydispatchdevs.deliverydispatcher.order;
 
-/**
- * Created by Saad on 7/16/2015.
- */
+
 public class Address
 {
     private String mAddress;
@@ -15,7 +13,7 @@ public class Address
         if (getClass() != other.getClass())
             return false;
         Address address = (Address) other;
-        return address.toString().equals(mAddress.toString());
+        return address.toString().equals(mAddress);
     }
 }
 
