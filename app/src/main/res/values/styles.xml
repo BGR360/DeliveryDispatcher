@@ -4,6 +4,9 @@
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorBackground">@color/colorTextIcon</item>
+        <item name="android:textColorPrimary">@color/colorTextIcon</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <style name="AppTheme" parent="AppTheme.Base">
