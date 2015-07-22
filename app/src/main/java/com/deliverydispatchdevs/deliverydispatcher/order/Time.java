@@ -6,28 +6,33 @@ import java.text.SimpleDateFormat;
 
 public class Time
 {
-    private int mHours, mMinutes, mSeconds;
-
     public enum TimeOfDay
     {
         AM, PM
     }
 
+    private int mHours, mMinutes, mSeconds;
+
+    public Time()
+    {
+        this(0,0,0);
+    }
+
     public Time(int hour, int min, int sec)
     {
         mHours = hour;
-        mMinutes=min;
-        mSeconds=sec;
+        mMinutes = min;
+        mSeconds = sec;
     }
 
     public Time(int hour, int min)
     {
-        mHours = hour; mMinutes = min;
+        this(hour, min, 0);
     }
 
     public Time(int hour)
     {
-        mHours = hour;
+        this(hour, 0, 0);
     }
 
     // Constructors using AM and PM
