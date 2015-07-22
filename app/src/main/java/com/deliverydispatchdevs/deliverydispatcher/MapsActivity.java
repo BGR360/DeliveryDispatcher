@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends AppCompatActivity
 {
+    private static final String LOG_TAG = "MapsActivity";
 
     private GoogleMap mGoogleMap; // Might be null if Google Play services APK is not available.
 
