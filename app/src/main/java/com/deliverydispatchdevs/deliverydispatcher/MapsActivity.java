@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -14,13 +13,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener
+public class MapsActivity extends GoogleApisActivity
 {
     private static final String LOG_TAG = "MapsActivity";
 
-    private GoogleApiClient mGoogleApiClient;
     private GoogleMap mGoogleMap; // Might be null if Google Play services APK is not available.
 
     private SearchViewManager mSearchView;
@@ -69,27 +65,11 @@ public class MapsActivity extends AppCompatActivity implements
         return true;
     }
 
-    //---------INTERFACE METHODS FOR GOOGLEAPICLIENT---------//
-
     @Override
-    public void onConnected(Bundle bundle)
+    protected GoogleApiClient buildApiClient()
     {
-        Log.d(LOG_TAG, "GeoDataApi successfully connected!");
-
-        // We have to initialize the Suggestions Provider before it will function
-        PlaceSuggestionsProvider.initialize(mGoogleApiClient);
-    }
-
-    @Override
-    public void onConnectionSuspended(int i)
-    {
-        Log.d(LOG_TAG, "Api connection suspended: code=" + i);
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult)
-    {
-        Log.e(LOG_TAG, connectionResult.toString());
+        return new GoogleApiClient.Builder(this)
+                .build();
     }
 
     //---------PRIVATE METHODS---------//
