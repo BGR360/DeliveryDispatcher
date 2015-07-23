@@ -178,7 +178,7 @@ public class PlaceSuggestionsProvider extends ContentProvider
      */
     private LatLngBounds getLatLngBounds()
     {
-        Location deviceLocation = MyLocationFinder.getLastKnownLocation();
+        Location deviceLocation = LocationServices.getLastKnownLocation();
         if(deviceLocation == null)
         {
             return new LatLngBounds(

@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MyLocationFinder
+public class LocationServices
 {
-    private static final String LOG_TAG = "MyLocationFinder";
+    private static final String LOG_TAG = "LocationServices";
 
     // By default, we should spend 1 minute, and no more, searching for a Location
     private static final long DEFAULT_SEARCH_TIME_MILLIS = 1000 * 60;
