@@ -6,6 +6,9 @@ package com.deliverydispatchdevs.deliverydispatcher;
  * This class extends ContentProvider in order to provide custom search
  * suggestions to the SearchView in MapActivity. Utilizes the
  * Place Autocomplete feature of the Google Maps API for Android.
+ *
+ * NOTE: MUST CALL initialize(GoogleApiClient) FROM MAIN ACTIVITY BEFORE
+ * THIS CLASS BECOMES USABLE.
  */
 
 import android.app.SearchManager;

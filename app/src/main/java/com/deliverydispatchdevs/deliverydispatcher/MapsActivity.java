@@ -3,18 +3,24 @@ package com.deliverydispatchdevs.deliverydispatcher;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends AppCompatActivity
+public class MapsActivity extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener
 {
     private static final String LOG_TAG = "MapsActivity";
 
+    private GoogleApiClient mGoogleApiClient;
     private GoogleMap mGoogleMap; // Might be null if Google Play services APK is not available.
 
     private SearchViewManager mSearchView;
@@ -33,10 +39,25 @@ public class MapsActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onStart()
+    {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
     protected void onResume()
     {
         super.onResume();
         setUpMapIfNeeded();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        Log.d(LOG_TAG, "Disconnecting from Google Apis.");
+        mGoogleApiClient.disconnect();
+        super.onStop();
     }
 
     @Override
@@ -47,6 +68,31 @@ public class MapsActivity extends AppCompatActivity
         mSearchView = new SearchViewManager(this, menu);
         return true;
     }
+
+    //---------INTERFACE METHODS FOR GOOGLEAPICLIENT---------//
+
+    @Override
+    public void onConnected(Bundle bundle)
+    {
+        Log.d(LOG_TAG, "GeoDataApi successfully connected!");
+
+        // We have to initialize the Suggestions Provider before it will function
+        PlaceSuggestionsProvider.initialize(mGoogleApiClient);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i)
+    {
+        Log.d(LOG_TAG, "Api connection suspended: code=" + i);
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult)
+    {
+        Log.e(LOG_TAG, connectionResult.toString());
+    }
+
+    //---------PRIVATE METHODS---------//
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
