@@ -2,4 +2,6 @@
     <string name="app_name">Delivery Dispatcher</string>
     <string name="title_activity_maps">Delivery Dispatcher</string>
     <string name="action_search_hint">Search Addresses...</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
 </resources>

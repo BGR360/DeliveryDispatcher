@@ -3,6 +3,7 @@ package com.deliverydispatchdevs.deliverydispatcher;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -15,6 +16,8 @@ public class MapsActivity extends AppCompatActivity
     private static final String LOG_TAG = "MapsActivity";
 
     private GoogleMap mGoogleMap; // Might be null if Google Play services APK is not available.
+
+    private SearchViewManager mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,6 +39,15 @@ public class MapsActivity extends AppCompatActivity
         setUpMapIfNeeded();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_map, menu);
+        mSearchView = new SearchViewManager(this, menu);
+        return true;
+    }
+
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
@@ -51,6 +63,7 @@ public class MapsActivity extends AppCompatActivity
      * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
      */
+    @SuppressWarnings("Convert2Lambda")
     private void setUpMapIfNeeded()
     {
         // Do a null check to confirm that we have not already instantiated the map.
