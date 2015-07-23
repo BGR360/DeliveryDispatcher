@@ -9,6 +9,9 @@ package com.deliverydispatchdevs.deliverydispatcher;
  * for the device's location (for a specified length of time in
  * milliseconds) if no suitable last-known location exists.
  *
+ * NOTE: MUST CALL initialize(Context) FROM MAIN ACTIVITY
+ * BEFORE CLASS BECOMES FUNCTIONAL
+ *
  * All public methods are static.
  */
 

@@ -32,6 +32,7 @@ public class MapsActivity extends GoogleApisActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.mapToolbar);
         setSupportActionBar(toolbar);
 
+        LocationServices.initialize(this);
         setUpMapIfNeeded();
     }
 

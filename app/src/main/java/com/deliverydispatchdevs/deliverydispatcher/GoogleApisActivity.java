@@ -5,7 +5,10 @@ package com.deliverydispatchdevs.deliverydispatcher;
  *
  * This class is the base class for an Activity
  * which utilizes one or more Google APIs.
- * Subclasses must override ac
+ *
+ * Subclasses must override buildApiClient() to
+ * build a GoogleApiClient that has all the
+ * necessary Google APIs.
  */
 
 import android.os.Bundle;
