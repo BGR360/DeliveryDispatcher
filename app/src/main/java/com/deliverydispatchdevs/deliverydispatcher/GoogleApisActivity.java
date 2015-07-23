@@ -28,6 +28,8 @@ public abstract class GoogleApisActivity extends AppCompatActivity implements
     {
         super.onCreate(savedInstanceState);
         mGoogleApiClient = buildApiClient();
+        mGoogleApiClient.registerConnectionCallbacks(this);
+        mGoogleApiClient.registerConnectionFailedListener(this);
     }
 
     @Override
