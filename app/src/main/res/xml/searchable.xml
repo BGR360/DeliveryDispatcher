@@ -3,7 +3,7 @@
             android:label="@string/title_activity_maps"
             android:hint="@string/action_search_hint"
             android:inputType="text|textNoSuggestions"
-            android:searchSuggestAuthority="com.example.bgr.googleplacessearch.PlaceSuggestionsProvider"
+            android:searchSuggestAuthority="PlaceSuggestionsProvider"
             android:searchSuggestIntentAction="android.intent.action.VIEW"
-            android:searchSuggestIntentData="content://com.example.bgr.googleplacessearch.PlaceSuggestionsProvider/search_suggest_query">
+            android:searchSuggestIntentData="content://PlaceSuggestionsProvider/search_suggest_query">
 </searchable>
