@@ -39,7 +39,6 @@ public class MapsActivity extends GoogleApisActivity
     protected void onStart()
     {
         super.onStart();
-        mGoogleApiClient.connect();
     }
 
     @Override
@@ -52,8 +51,6 @@ public class MapsActivity extends GoogleApisActivity
     @Override
     protected void onStop()
     {
-        Log.d(LOG_TAG, "Disconnecting from Google Apis.");
-        mGoogleApiClient.disconnect();
         super.onStop();
     }
 
