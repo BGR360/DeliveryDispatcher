@@ -1,5 +1,6 @@
 package com.deliverydispatchdevs.deliverydispatcher;
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,25 @@ import java.util.List;
 
 public class CustomAdapter extends ArrayAdapter<DeliveryOrder>
 {
-    public CustomAdapter(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
+    Collection<DeliveryOrder> orderList = OrderManager.getUndispatchedOrders();
+    public CustomAdapter(Context context)
+    {
+        super(context, R.layout.custom_row);
     }
 
-    public CustomAdapter(Context context, int resource, List<DeliveryOrder> items) {
-        super(context, resource, items);
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        LayoutInflater saadInflater = LayoutInflater.from(getContext());
+        View customView = saadInflater.inflate(R.layout.custom_row, parent, false);
+
+
+        DeliveryOrder orderForThisRow = ((ArrayList) OrderManager.getUndispatchedOrders() ).get(position);
+
+        TextView orderNumView = (TextView) customView.findViewById(R.id.OrderNumView);
+        TextView addressView = (TextView) customView.findViewById(R.id.AddressView);
+        TextView dueTimeView = (TextView) customView.findViewById(R.id.DueTimeView);
+
+        )
     }
-
-
 }
