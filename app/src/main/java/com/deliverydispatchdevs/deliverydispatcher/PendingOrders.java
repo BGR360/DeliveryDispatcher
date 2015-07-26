@@ -29,10 +29,11 @@ public class PendingOrders extends AppCompatActivity {
         // This is the array adapter, it takes the context of the activity as a
         // first parameter, the type of list view as a second parameter and your
         // array as a third parameter.
-        ArrayAdapter<DeliveryOrder> arrayAdapter = new ArrayAdapter<DeliveryOrder>(
-                this,
-                android.R.layout.simple_list_item_1,
-                myList );
+        Collection<DeliveryOrder> ordererList = OrderManager.getUndispatchedOrders();
+        ArrayAdapter<DeliveryOrder> arrayAdapter = new CustomAdapter(this);
+        ListView saadsView = (ListView) findViewById(R.id.listView);
+        saadsView.setAdapter(arrayAdapter);
+
 
         lv.setAdapter(arrayAdapter);
     }
@@ -58,5 +59,12 @@ public class PendingOrders extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        OrderManager.clearAll();
+        super.onDestroy();
     }
 }

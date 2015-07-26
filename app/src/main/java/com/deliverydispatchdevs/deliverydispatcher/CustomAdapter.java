@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CustomAdapter extends ArrayAdapter<DeliveryOrder>
 {
-    Collection<DeliveryOrder> orderList = OrderManager.getUndispatchedOrders();
+
     public CustomAdapter(Context context)
     {
         super(context, R.layout.custom_row);
@@ -31,12 +31,18 @@ public class CustomAdapter extends ArrayAdapter<DeliveryOrder>
         View customView = saadInflater.inflate(R.layout.custom_row, parent, false);
 
 
-        DeliveryOrder orderForThisRow = ((ArrayList) OrderManager.getUndispatchedOrders() ).get(position);
+        DeliveryOrder orderForThisRow = ((ArrayList<DeliveryOrder>) OrderManager.getUndispatchedOrders()).get(position);
 
         TextView orderNumView = (TextView) customView.findViewById(R.id.OrderNumView);
         TextView addressView = (TextView) customView.findViewById(R.id.AddressView);
         TextView dueTimeView = (TextView) customView.findViewById(R.id.DueTimeView);
 
-        )
+        orderNumView.setText(orderForThisRow.getOrderNumber());
+        addressView.setText((CharSequence) orderForThisRow.getDestination());
+        dueTimeView.setText((CharSequence) orderForThisRow.getPromisedTime());
+
+        return customView;
+
+
     }
 }
