@@ -37,22 +37,10 @@ public class MapsActivity extends GoogleApisActivity
     }
 
     @Override
-    protected void onStart()
-    {
-        super.onStart();
-    }
-
-    @Override
     protected void onResume()
     {
         super.onResume();
         setUpMapIfNeeded();
-    }
-
-    @Override
-    protected void onStop()
-    {
-        super.onStop();
     }
 
     @Override
@@ -64,6 +52,11 @@ public class MapsActivity extends GoogleApisActivity
         return true;
     }
 
+    /**
+     * This is where we ask for all the APIs we need to use in the app.
+     *
+     * @return A new GoogleApiClient with all the APIs.
+     */
     @Override
     protected GoogleApiClient buildApiClient()
     {
