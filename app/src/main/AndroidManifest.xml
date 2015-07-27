@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name=".PendingOrders"
-            android:label="@string/title_activity_pending_orders" >
+            android:label="Orders View" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
