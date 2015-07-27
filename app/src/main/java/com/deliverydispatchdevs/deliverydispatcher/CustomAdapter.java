@@ -27,11 +27,19 @@ public class CustomAdapter extends ArrayAdapter<DeliveryOrder>
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        LayoutInflater saadInflater = LayoutInflater.from(getContext());
-        View customView = saadInflater.inflate(R.layout.custom_row, parent, false);
-
+        View customView;
+        if(convertView == null)
+        {
+            LayoutInflater saadInflater = LayoutInflater.from(getContext());
+            customView = saadInflater.inflate(R.layout.custom_row, parent, false);
+        }
+        else
+        {
+            customView = convertView;
+        }
 
         DeliveryOrder orderForThisRow = ((ArrayList<DeliveryOrder>) OrderManager.getUndispatchedOrders()).get(position);
+
 
         TextView orderNumView = (TextView) customView.findViewById(R.id.OrderNumView);
         TextView addressView = (TextView) customView.findViewById(R.id.AddressView);
