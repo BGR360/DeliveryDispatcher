@@ -1,5 +1,6 @@
 package com.deliverydispatchdevs.deliverydispatcher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,19 +28,7 @@ public class MapsActivity extends GoogleApisActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        // Set the Toolbar from our layout as our activity's ActionBar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.mapToolbar);
-        setSupportActionBar(toolbar);
-
-        LocationServices.initialize(this);
-        setUpMapIfNeeded();
-    }
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
+        handleIntent(getIntent());
     }
 
     @Override
@@ -47,12 +36,6 @@ public class MapsActivity extends GoogleApisActivity
     {
         super.onResume();
         setUpMapIfNeeded();
-    }
-
-    @Override
-    protected void onStop()
-    {
-        super.onStop();
     }
 
     @Override
@@ -73,6 +56,47 @@ public class MapsActivity extends GoogleApisActivity
     }
 
     //---------PRIVATE METHODS---------//
+
+    /**
+     * This activity can be called with three possible intents:
+     *      1.  The LAUNCH intent
+     *      2.  The SEARCH intent
+     *      3.  The VIEW intent
+     * This method handles the Intent and decides how to act accordingly
+     *
+     * @param intent The Intent that the Activity was launched with
+     */
+    @SuppressWarnings("StatementWithEmptyBody")
+    private void handleIntent(Intent intent)
+    {
+        if(Intent.ACTION_SEARCH.equals(intent.getAction()))
+        {
+            // The SEARCH intent means that the user pressed enter in the SearchView
+        }
+        else if(Intent.ACTION_VIEW.equals(intent.getAction()))
+        {
+            // The VIEW intent means that the user selected one of the search suggestions
+        }
+        else
+        {
+            // It was the LAUNCH intent, we should initialize our state
+            initializeActivity();
+        }
+    }
+
+    /**
+     * Sets up all the necessary stuff 'n things for our Activity
+     * upon its creation
+     */
+    private void initializeActivity()
+    {
+        // Set the Toolbar from our layout as our activity's ActionBar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mapToolbar);
+        setSupportActionBar(toolbar);
+
+        LocationServices.initialize(this);
+        setUpMapIfNeeded();
+    }
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
