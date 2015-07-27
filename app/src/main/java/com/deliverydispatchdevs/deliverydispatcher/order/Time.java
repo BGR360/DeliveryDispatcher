@@ -121,13 +121,17 @@ public class Time
 
             s += (mHours - 12) + ":";
         }
-        else if(mHours <= 12)
+        else if( (mHours <= 12) && (mHours!=0))
         {
             if(mHours < 10)
             {
                 s += "0";
             }
             s += mHours + ":";
+        }
+        else if(mHours == 0)
+        {
+            s += "12:";
         }
         if(mMinutes < 10)
         {
@@ -137,11 +141,11 @@ public class Time
         {
             s += "0";
         } s += mSeconds;
-        if(mHours > 12)
+        if(mHours >= 12)
         {
             s += " PM";
         }
-        else if(mHours <= 12)
+        else if(mHours < 12)
         {
             s += " AM";
         }
