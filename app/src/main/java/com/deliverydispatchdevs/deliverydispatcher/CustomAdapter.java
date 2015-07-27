@@ -21,7 +21,7 @@ public class CustomAdapter extends ArrayAdapter<DeliveryOrder>
 
     public CustomAdapter(Context context)
     {
-        super(context, R.layout.custom_row);
+        super(context, R.layout.custom_row, (List)OrderManager.getUndispatchedOrders());
     }
 
     @Override
@@ -37,9 +37,9 @@ public class CustomAdapter extends ArrayAdapter<DeliveryOrder>
         TextView addressView = (TextView) customView.findViewById(R.id.AddressView);
         TextView dueTimeView = (TextView) customView.findViewById(R.id.DueTimeView);
 
-        orderNumView.setText(orderForThisRow.getOrderNumber());
-        addressView.setText((CharSequence) orderForThisRow.getDestination());
-        dueTimeView.setText((CharSequence) orderForThisRow.getPromisedTime());
+        orderNumView.setText((Integer.toString(orderForThisRow.getOrderNumber())));
+        addressView.setText(orderForThisRow.getDestination().toString());
+        dueTimeView.setText(orderForThisRow.getPromisedTime().toString());
 
         return customView;
 

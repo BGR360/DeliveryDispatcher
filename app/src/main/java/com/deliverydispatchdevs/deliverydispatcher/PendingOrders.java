@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.deliverydispatchdevs.deliverydispatcher.order.Address;
 import com.deliverydispatchdevs.deliverydispatcher.order.DeliveryOrder;
 import com.deliverydispatchdevs.deliverydispatcher.order.OrderManager;
+import com.deliverydispatchdevs.deliverydispatcher.order.Time;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,24 +20,31 @@ import java.util.List;
 
 public class PendingOrders extends AppCompatActivity {
 
-    private ListView lv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_orders);
-        lv = (ListView) findViewById(R.id.listView);
 
+        Address address1 = new Address(("2581 Eldorado Ln"));
+        Time time1 = new Time(13,12,11);
+
+        Address address2 = new Address("Something Bennington Ct.");
+        Time time2 = new Time(2, 24, 26);
+
+        DeliveryOrder order1 = new DeliveryOrder(1, address1, time1);
+        DeliveryOrder order2 =  new DeliveryOrder(2, address2, time2);
+
+        OrderManager.placeOrder(order1);
+        OrderManager. placeOrder(order2);
 
         // This is the array adapter, it takes the context of the activity as a
         // first parameter, the type of list view as a second parameter and your
         // array as a third parameter.
-        Collection<DeliveryOrder> ordererList = OrderManager.getUndispatchedOrders();
         ArrayAdapter<DeliveryOrder> arrayAdapter = new CustomAdapter(this);
         ListView saadsView = (ListView) findViewById(R.id.listView);
         saadsView.setAdapter(arrayAdapter);
 
-
-        lv.setAdapter(arrayAdapter);
     }
 
 

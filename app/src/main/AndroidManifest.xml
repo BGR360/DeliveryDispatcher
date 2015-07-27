@@ -28,15 +28,18 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
+
+
+        </activity>
+        <activity
+            android:name=".PendingOrders"
+            android:label="@string/title_activity_pending_orders" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".PendingOrders"
-            android:label="@string/title_activity_pending_orders" >
+
         </activity>
     </application>
 
