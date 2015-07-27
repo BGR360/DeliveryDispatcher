@@ -111,13 +111,44 @@ public class Time
     public String toString()
     {
         String s = "";
-        if(mHours <  10){ s  += "0";}
-        s += mHours; s += ":";
-        if(mMinutes < 10) {s += "0";}
-        s += mMinutes; s += ":";
-        if(mSeconds < 10) {s += 0;}
-        s += mSeconds;
-        if(mHours < 12) s += " AM"; else s += " PM";
+
+        if(mHours > 12)
+        {
+            if ((mHours - 12) < 10)
+            {
+                s += "0";
+            }
+
+            s += (mHours - 12) + ":";
+        }
+        else if( (mHours <= 12) && (mHours!=0))
+        {
+            if(mHours < 10)
+            {
+                s += "0";
+            }
+            s += mHours + ":";
+        }
+        else if(mHours == 0)
+        {
+            s += "12:";
+        }
+        if(mMinutes < 10)
+        {
+            s += "0";
+        } s += mMinutes + ":";
+        if(mSeconds < 10)
+        {
+            s += "0";
+        } s += mSeconds;
+        if(mHours >= 12)
+        {
+            s += " PM";
+        }
+        else if(mHours < 12)
+        {
+            s += " AM";
+        }
         return s;
     }
 }

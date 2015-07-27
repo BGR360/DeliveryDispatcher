@@ -35,14 +35,25 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
             android:launchMode="singleTop">
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH"/>
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
+
+        </activity>
+        <activity
+            android:name=".PendingOrders"
+            android:label="Orders View" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
     </application>
 

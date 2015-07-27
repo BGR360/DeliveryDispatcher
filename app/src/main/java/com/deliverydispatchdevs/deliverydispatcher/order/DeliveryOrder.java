@@ -25,6 +25,13 @@ public class DeliveryOrder
         mOrderNumber = orderNumber;
     }
 
+    public  DeliveryOrder(int orderNum, Address addresses, Time dueTime)
+    {
+        mOrderNumber = orderNum;
+        mDestination = addresses;
+        mPromisedTime = dueTime;
+    }
+
     public Address getDestination() {return mDestination; }
 
     public Time getPlacedTime() {return mPlacedTime;}
