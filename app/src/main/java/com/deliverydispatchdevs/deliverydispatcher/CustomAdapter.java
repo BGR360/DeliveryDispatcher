@@ -21,7 +21,7 @@ public class CustomAdapter extends ArrayAdapter<DeliveryOrder>
 
     public CustomAdapter(Context context)
     {
-        super(context, R.layout.custom_row, (List)OrderManager.getUndispatchedOrders());
+        super(context, R.layout.custom_row, (List<DeliveryOrder>)OrderManager.getUndispatchedOrders());
     }
 
     @Override
