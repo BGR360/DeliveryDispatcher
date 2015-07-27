@@ -22,13 +22,27 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
+            android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
+        <provider
+            android:authorities="com.deliverydispatchdevs.deliverydispatcher.PlaceSuggestionsProvider"
+            android:name="PlaceSuggestionsProvider"
+            android:enabled="true"
+            android:exported="false"/>
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:launchMode="singleTop">
 
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
 
         </activity>
         <activity
@@ -36,7 +50,7 @@
             android:label="Orders View" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 

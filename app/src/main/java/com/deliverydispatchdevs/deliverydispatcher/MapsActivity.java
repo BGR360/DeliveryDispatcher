@@ -3,18 +3,24 @@ package com.deliverydispatchdevs.deliverydispatcher;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends AppCompatActivity
+public class MapsActivity extends GoogleApisActivity
 {
     private static final String LOG_TAG = "MapsActivity";
 
     private GoogleMap mGoogleMap; // Might be null if Google Play services APK is not available.
+
+    private SearchViewManager mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,7 +32,14 @@ public class MapsActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.mapToolbar);
         setSupportActionBar(toolbar);
 
+        LocationServices.initialize(this);
         setUpMapIfNeeded();
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
     }
 
     @Override
@@ -35,6 +48,31 @@ public class MapsActivity extends AppCompatActivity
         super.onResume();
         setUpMapIfNeeded();
     }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_map, menu);
+        mSearchView = new SearchViewManager(this, menu);
+        return true;
+    }
+
+    @Override
+    protected GoogleApiClient buildApiClient()
+    {
+        return new GoogleApiClient.Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .build();
+    }
+
+    //---------PRIVATE METHODS---------//
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
@@ -51,6 +89,7 @@ public class MapsActivity extends AppCompatActivity
      * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
      */
+    @SuppressWarnings("Convert2Lambda")
     private void setUpMapIfNeeded()
     {
         // Do a null check to confirm that we have not already instantiated the map.
