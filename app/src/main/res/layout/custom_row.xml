@@ -8,19 +8,27 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/OrderNumView"
-        android:padding="5dp" />
+        android:padding="10dp"
+        android:layout_gravity="left" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/AddressView"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/DueTimeView"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:layout_gravity="right" />
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+    </TableRow>
 </LinearLayout>
