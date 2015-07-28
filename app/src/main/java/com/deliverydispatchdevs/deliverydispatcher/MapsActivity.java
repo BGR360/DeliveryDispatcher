@@ -1,12 +1,7 @@
 package com.deliverydispatchdevs.deliverydispatcher;
 
-import android.app.SearchManager;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.net.Uri;
-import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,24 +9,12 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Result;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.GeoDataApi;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class MapsActivity extends GoogleApisActivity
 {
@@ -99,16 +82,10 @@ public class MapsActivity extends GoogleApisActivity
         if(Intent.ACTION_SEARCH.equals(intent.getAction()))
         {
             // The SEARCH intent means that the user pressed enter in the SearchView
-            String searchText = intent.getStringExtra(SearchManager.QUERY);
-            Location locationSearched = getLocationFromSearchText(searchText);
-            createNewOrder(locationSearched);
         }
         else if(Intent.ACTION_VIEW.equals(intent.getAction()))
         {
             // The VIEW intent means that the user selected one of the search suggestions
-            String placeID = intent.getData().getLastPathSegment();
-            Location locationSearched = getLocationFromPlaceId(placeID);
-            createNewOrder(locationSearched);
         }
         else
         {
@@ -182,82 +159,6 @@ public class MapsActivity extends GoogleApisActivity
     private void setUpMap()
     {
         mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("A Different Title"));
-    }
-
-    /**
-     * Converts a search query into a Place
-     *
-     * @param searchText The text of the Address the user wants to search
-     * @return A Location that corresponds to the searched address, or null if no
-     * suitable Location was found
-     */
-    private Location getLocationFromSearchText(String searchText)
-    {
-        Location location = null;
-
-        // Use the Geocoding API to convert an address to a Place
-        if(Geocoder.isPresent())
-        {
-            Geocoder geocoder = new Geocoder(this);
-            try
-            {
-                List<Address> addresses = geocoder.getFromLocationName(searchText, 1);
-                Address address = addresses.get(0);
-                if(address != null)
-                {
-                    location = new Location("Location");
-                    location.setLatitude(address.getLatitude());
-                    location.setLongitude(address.getLongitude());
-                }
-                else
-                {
-                    Log.e(LOG_TAG, "Could not create Place from address: Geocoder returned null Address.");
-                }
-            }
-            catch (IOException e)
-            {
-                Log.e(LOG_TAG, e.toString());
-            }
-        }
-        else
-        {
-            Log.e(LOG_TAG, "Could not create Place from address: Geocoder not present.");
-        }
-
-        return location;
-    }
-
-    /**
-     * Converts a Place ID to a Location
-     *
-     * @param placeId The Place ID of the Place we want to find
-     * @return The Place referred to by placeId, or null if an invalid id
-     */
-    private Location getLocationFromPlaceId(String placeId)
-    {
-        Location location = null;
-
-        PendingResult<PlaceBuffer> result = Places.GeoDataApi.getPlaceById(mGoogleApiClient, placeId);
-        PlaceBuffer placeBuffer = result.await();
-
-        // Check the status of the PlaceBuffer
-        Status status = placeBuffer.getStatus();
-        if(status.isSuccess())
-        {
-            Place place = placeBuffer.get(0);
-            location = new Location("Location");
-            location.setLatitude(place.getLatLng().latitude);
-            location.setLatitude(place.getLatLng().longitude);
-        }
-        else
-        {
-            Toast.makeText(MapsActivity.this, "Error contacting API: " + status.toString(),
-                    Toast.LENGTH_SHORT).show();
-            Log.e(LOG_TAG, "Error getting autocomplete prediction API call: " + status.toString());
-        }
-        placeBuffer.release();
-
-        return location;
     }
 
     /**
