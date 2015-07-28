@@ -1,10 +1,12 @@
 package com.deliverydispatchdevs.deliverydispatcher;
 
+import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Places;
@@ -18,7 +20,7 @@ public class MapsActivity extends GoogleApisActivity
 {
     private static final String LOG_TAG = "MapsActivity";
 
-    private GoogleMap mGoogleMap; // Might be null if Google Play services APK is not available.
+    private GoogleMap mGoogleMap; // Might be null if Google Play services API is not available.
 
     private SearchViewManager mSearchView;
 
@@ -27,13 +29,7 @@ public class MapsActivity extends GoogleApisActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        // Set the Toolbar from our layout as our activity's ActionBar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.mapToolbar);
-        setSupportActionBar(toolbar);
-
-        LocationServices.initialize(this);
-        setUpMapIfNeeded();
+        handleIntent(getIntent());
     }
 
     @Override
@@ -44,10 +40,19 @@ public class MapsActivity extends GoogleApisActivity
     }
 
     @Override
+    protected void onNewIntent(Intent intent)
+    {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_map, menu);
+
+        // Set up the SearchViewManager to do its thing
         mSearchView = new SearchViewManager(this, menu);
         return true;
     }
@@ -66,6 +71,47 @@ public class MapsActivity extends GoogleApisActivity
     }
 
     //---------PRIVATE METHODS---------//
+
+    /**
+     * This activity can be called with three possible intents:
+     *      1.  The LAUNCH intent
+     *      2.  The SEARCH intent
+     *      3.  The VIEW intent
+     * This method handles the Intent and decides how to act accordingly
+     *
+     * @param intent The Intent that the Activity was launched with
+     */
+    @SuppressWarnings("StatementWithEmptyBody")
+    private void handleIntent(Intent intent)
+    {
+        if(Intent.ACTION_SEARCH.equals(intent.getAction()))
+        {
+            // The SEARCH intent means that the user pressed enter in the SearchView
+        }
+        else if(Intent.ACTION_VIEW.equals(intent.getAction()))
+        {
+            // The VIEW intent means that the user selected one of the search suggestions
+        }
+        else
+        {
+            // It was the LAUNCH intent, we should initialize our state
+            initializeActivity();
+        }
+    }
+
+    /**
+     * Sets up all the necessary stuff 'n things for our Activity
+     * upon its creation
+     */
+    private void initializeActivity()
+    {
+        // Set the Toolbar from our layout as our activity's ActionBar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mapToolbar);
+        setSupportActionBar(toolbar);
+
+        LocationServices.initialize(this);
+        setUpMapIfNeeded();
+    }
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
@@ -118,5 +164,17 @@ public class MapsActivity extends GoogleApisActivity
     private void setUpMap()
     {
         mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("A Different Title"));
+    }
+
+    /**
+     * Opens the NewOrderDialog so that the user can create a new Order
+     * from the address they searched.
+     *
+     * @param address A Location that represents the address of the order.
+     */
+    private void createNewOrder(Location address)
+    {
+        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+        Toast.makeText(this, "Creating a new Order at " + latLng.toString(), Toast.LENGTH_SHORT).show();
     }
 }
