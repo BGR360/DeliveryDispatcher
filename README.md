@@ -13,6 +13,6 @@ This repo does not actually contain the correct code that runs what you see in t
 
 ## Demo Video
 
-[![Demo Video](http://img.youtube.com/vi/y3qQZIfqHEo/0.jpg)](http://www.youtube.com/watch?v=y3qQZIfqHEo)
+[![Demo Video](http://img.youtube.com/vi/v0kiGPuEM0w/0.jpg)](http://www.youtube.com/watch?v=v0kiGPuEM0w)
 
 ## Screenshots
