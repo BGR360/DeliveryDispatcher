@@ -13,7 +13,7 @@ This app allows the user to place multiple pins on the same map, which is extrem
 
 ## The Code
 
-This repo does not actually contain the correct code that runs what you see in the screenshots. This is the code from when a friend and I tried to revamp my original side project into a more robust app. The screenshots and demo video that you see is from the original side project, which is on my old computer. I may upload that one to GitHub soon.
+The [DeliveryDispatcher folder](DeliveryDispatcher) does not actually contain the correct code that runs what you see in the screenshots. This is the code from when a friend and I tried to revamp my original side project into a more robust app. The screenshots and demo video that you see is from the original side project, the code for which can be found in the [ActualCode folder](ActualCode).
 
 ## Screenshots
 
