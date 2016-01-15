@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar"></style>
+
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="colorPrimary">#ffffff</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="android:dropDownItemStyle">@style/AppTheme.SearchView.DropDown</item>
+    </style>
+
+    <style name="AppTheme.SearchView.DropDown" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@color/primary_text_default_material_light</item>
+        <item name="android:textSize">@dimen/abc_text_size_small_material</item>
+    </style>
+
+</resources>
